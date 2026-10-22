@@ -1,0 +1,59 @@
+---
+layout: null
+title: Le carnet
+---
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Le carnet · Mélanie Thomas</title>
+  <meta name="description" content="Notes de terrain, lectures et retours d'expérience : low-tech, tiers-lieux, design et transmission des sciences.">
+  <link rel="stylesheet" href="{{ '/assets/style.css' | relative_url }}">
+</head>
+<body class="page">
+  <header class="top">
+    <a class="brand" href="{{ '/' | relative_url }}">Mélanie Thomas</a>
+    <nav aria-label="Raccourcis">
+      <a href="{{ '/#fleurs' | relative_url }}">Projets</a>
+      <a href="{{ '/carnet/' | relative_url }}">Carnet</a>
+      <a href="{{ '/#etiquette' | relative_url }}">Contact</a>
+    </nav>
+  </header>
+  <main>
+    <article class="sheet">
+      <p class="kicker">Les graines</p>
+      <h1>Le carnet</h1>
+      <p>Notes de terrain, lectures et retours d'expérience. Elles voyagent plus loin que la plante.</p>
+
+      <ul class="rubriques">
+        {% for r in site.rubriques %}<li><a href="#{{ r | slugify }}">{{ r }}</a></li>{% endfor %}
+      </ul>
+
+      {% if site.posts.size == 0 %}
+        <p class="empty">Les premières graines germent : le carnet arrive bientôt.</p>
+      {% endif %}
+
+      {% for r in site.rubriques %}
+        {% assign liste = site.posts | where: "rubrique", r %}
+        <h2 class="rubrique" id="{{ r | slugify }}">{{ r }}</h2>
+        {% if liste.size > 0 %}
+        <ul class="posts">
+          {% for post in liste %}
+          <li>
+            <span class="meta">{{ post.date | date: "%d.%m.%Y" }}</span>
+            <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+            <p>{{ post.resume | default: post.excerpt | strip_html | strip_newlines | truncate: 200 }}</p>
+          </li>
+          {% endfor %}
+        </ul>
+        {% else %}
+        <p class="empty">Pas encore de graine dans cette rubrique.</p>
+        {% endif %}
+      {% endfor %}
+
+      <a class="back" href="{{ '/' | relative_url }}">← Revenir à la plante</a>
+    </article>
+  </main>
+</body>
+</html>

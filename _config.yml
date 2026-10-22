@@ -1,0 +1,33 @@
+# Site de Mélanie Thomas — construit automatiquement par GitHub Pages (Jekyll).
+title: Mélanie Thomas
+description: "Entre design, low-tech et communs : je fabrique, je forme, je fédère et je documente."
+lang: fr
+url: "https://melaniethms.github.io"
+baseurl: "/siteweb"
+
+# Les articles du carnet sont dans le dossier _posts (un fichier Markdown par article).
+permalink: /carnet/:year/:title/
+markdown: kramdown
+kramdown:
+  input: GFM
+  hard_wrap: false
+
+timezone: Europe/Zurich
+
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+
+# Rubriques du carnet (champ « rubrique » de chaque article)
+rubriques:
+  - Low-tech & sobriété
+  - Faire & tiers-lieux
+  - Design, soin & handicap
+  - Sciences & transmission
+
+exclude:
+  - README.md
+  - MODELE-ARTICLE.md

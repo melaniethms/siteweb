@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ page.title }} · Carnet de Mélanie Thomas</title>
+  <meta name="description" content="{{ page.resume | default: page.excerpt | strip_html | strip_newlines | truncate: 160 }}">
+  <meta property="og:title" content="{{ page.title }}">
+  <meta property="og:type" content="article">
+  <link rel="stylesheet" href="{{ '/assets/style.css' | relative_url }}">
+</head>
+<body class="page">
+  <header class="top">
+    <a class="brand" href="{{ '/' | relative_url }}">Mélanie Thomas</a>
+    <nav aria-label="Raccourcis">
+      <a href="{{ '/#fleurs' | relative_url }}">Projets</a>
+      <a href="{{ '/carnet/' | relative_url }}">Carnet</a>
+      <a href="{{ '/#etiquette' | relative_url }}">Contact</a>
+    </nav>
+  </header>
+  <main>
+    <article class="sheet">
+      <p class="kicker">Carnet{% if page.rubrique %} · {{ page.rubrique }}{% endif %}</p>
+      <h1>{{ page.title }}</h1>
+      <p class="post-meta"><time datetime="{{ page.date | date: '%Y-%m-%d' }}">{{ page.date | date: "%d.%m.%Y" }}</time>{% if page.lieu %} · {{ page.lieu }}{% endif %}</p>
+      <div class="prose">
+        {{ content }}
+      </div>
+      <a class="back" href="{{ '/carnet/' | relative_url }}">← Toutes les graines du carnet</a>
+    </article>
+  </main>
+</body>
+</html>
