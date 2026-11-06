@@ -1,0 +1,152 @@
+# Configuration de Pages CMS (https://app.pagescms.org)
+# Se connecter avec GitHub, choisir le dépôt « siteweb » : les rubriques ci-dessous apparaissent dans le menu.
+
+media:
+  - name: images
+    label: Images
+    input: assets/images
+    output: /siteweb/assets/images
+    extensions: [jpg, jpeg, png, webp, gif, svg]
+
+content:
+  # ---------- Le carnet (articles) ----------
+  - name: carnet
+    label: Carnet (articles)
+    type: collection
+    path: _posts
+    filename:
+      template: "{year}-{month}-{day}-{primary}.md"
+      field: create
+    view:
+      fields: [title, rubrique]
+      primary: title
+      default:
+        sort: title
+        order: desc
+    fields:
+      - name: title
+        label: Titre
+        type: string
+        required: true
+      - name: rubrique
+        label: Rubrique
+        type: select
+        required: true
+        options:
+          values:
+            - Low-tech & sobriété
+            - Faire & tiers-lieux
+            - Design, soin & handicap
+            - Sciences & transmission
+      - name: lieu
+        label: Lieu (facultatif)
+        type: string
+      - name: resume
+        label: Résumé (affiché dans la liste du carnet)
+        type: text
+        options:
+          maxlength: 300
+      - name: body
+        label: Texte de l'article
+        type: rich-text
+        options:
+          format: markdown
+          media: images
+          switcher: true
+
+  # ---------- Le parcours ----------
+  - name: accueil
+    label: "Parcours · Graine (accroche)"
+    type: file
+    path: _data/accueil.yml
+    fields:
+      - name: accroche
+        label: Accroche
+        type: text
+      - name: sous_ligne
+        label: Sous-ligne
+        type: text
+
+  - name: racines
+    label: "Parcours · Racines (formations)"
+    type: file
+    path: _data/racines.yml
+    list: true
+    fields:
+      - name: quand
+        label: Quand
+        type: string
+      - name: titre
+        label: Titre (en gras)
+        type: string
+      - name: detail
+        label: Détail
+        type: text
+
+  - name: reseau
+    label: "Parcours · Rhizomes (réseau)"
+    type: file
+    path: _data/reseau.yml
+    list: true
+    fields:
+      - name: quand
+        label: Quand
+        type: string
+      - name: titre
+        label: Titre (en gras, facultatif)
+        type: string
+      - name: detail
+        label: Détail
+        type: text
+
+  - name: interventions
+    label: "Parcours · Tige (interventions)"
+    type: file
+    path: _data/interventions.yml
+    list: true
+    fields:
+      - name: quand
+        label: Quand
+        type: string
+      - name: titre
+        label: Titre (en gras, facultatif)
+        type: string
+      - name: detail
+        label: Détail (**gras** et *italique* acceptés)
+        type: text
+
+  - name: verbes
+    label: "Parcours · Feuilles (quatre verbes)"
+    type: file
+    path: _data/verbes.yml
+    list: true
+    fields:
+      - name: titre
+        label: Verbe
+        type: string
+      - name: texte
+        label: Texte (*italique* accepté)
+        type: text
+
+  - name: projets
+    label: "Parcours · Fleurs (projets)"
+    type: file
+    path: _data/projets.yml
+    list: true
+    fields:
+      - name: titre
+        label: Nom du projet
+        type: string
+        required: true
+      - name: meta
+        label: Dates · rôle
+        type: string
+      - name: texte
+        label: Description
+        type: text
+      - name: lien
+        label: Lien (facultatif)
+        type: string
+      - name: lien_texte
+        label: Texte du lien
+        type: string

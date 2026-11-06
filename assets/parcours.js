@@ -1,5 +1,6 @@
 /* Melania fabricatrix — parcours de la graine aux graines.
-   Tout le contenu est dans SCENES : on peut modifier les textes ici sans toucher au reste.
+   Les listes (formations, réseau, interventions, verbes, projets) et l'accroche viennent du dossier _data,
+   modifiable depuis Pages CMS. Les autres textes du parcours sont dans SCENES ci-dessous.
    Chaque étape a son adresse (#racines, #fleurs, …). */
 
 const SCENES = {
@@ -9,14 +10,7 @@ const SCENES = {
     title: "D'où elle vient",
     body: [
       "<p>Des racines alsaciennes, tenaces. Puis une formation en design de produit et en ingénierie, entre Lyon et Paris, et des apprentissages qui continuent.</p>",
-      `<ul class="timeline">
-        <li><span class="when">2012</span><span><b>BTS Design de produit</b>, Lyon</span></li>
-        <li><span class="when">2014</span><span><b>DSAA Créateur concepteur</b>, design de produit, Lyon · mention bien</span></li>
-        <li><span class="when">2015</span><span><b>Master de recherche Innovation, Conception, Ingénierie</b>, Arts et Métiers, Paris · mention bien. Stage de designer-chercheuse chez Toyota Motor Europe.</span></li>
-        <li><span class="when">2022</span><span><b>Certificat « Thinking and Creating with Code »</b>, EPFL Extension School, avec l'association ada:flow</span></li>
-        <li><span class="when">2025 – 2026</span><span><b>Gestion d'association</b>, formation GAS 370°</span></li>
-        <li><span class="when">Depuis 2026</span><span><b>Artisane vannière en formation</b> avec Tilia, botanique de terrain comprise</span></li>
-      </ul>`
+      "__RACINES__"
     ],
     choices: [{ label: "Je suis les rhizomes", to: "rhizomes", primary: true }]
   },
@@ -27,13 +21,7 @@ const SCENES = {
     title: "Un réseau qui s'étend",
     body: [
       "<p>Depuis 2016, dans l'Arc jurassien, chaque lieu traversé est devenu un nœud du réseau.</p>",
-      `<ul class="timeline">
-        <li><span class="when">2016 – 2022</span><span><b>FabLab de la HE-Arc</b>, Neuchâtel&nbsp;: coordination, formations, mission Interreg « Communauté du Savoir »</span></li>
-        <li><span class="when">Depuis 2018</span><span><b>FabLab La Chaux-de-Fonds</b>, co-présidente depuis 2025&nbsp;: premier fablab suisse à orientation low-tech assumée</span></li>
-        <li><span class="when">2023 – 2025</span><span><b>SATW</b>, Académie suisse des sciences techniques&nbsp;: promotion de la relève en Suisse romande</span></li>
-        <li><span class="when">Depuis 2025</span><span><b>Girls* on Ice Switzerland</b>, programme manager</span></li>
-        <li><span class="when">Et aussi</span><span>HEP-BEJUNE, TestLab Delémont, Low-Tech Lab Lausanne, Club 44, Université de Neuchâtel…</span></li>
-      </ul>`
+      "__RESEAU__"
     ],
     asides: [{
       label: "Pourquoi des rhizomes ?",
@@ -48,8 +36,7 @@ const SCENES = {
     kicker: "Herbier de terrain · Melania fabricatrix",
     title: "Mélanie Thomas",
     body: [
-      "<p class=\"lead\">Entre design, low-tech et communs&nbsp;: je fabrique, je forme, je fédère et je documente.</p>",
-      "<p>Une pratique de terrain, entre conception et recherche, pour des manières plus sobres de concevoir et de faire ensemble.</p>",
+      "__ACCUEIL__",
       "<p>Ce site se parcourt comme une plante pousse&nbsp;: sous terre d'abord, puis la tige, les feuilles, les fleurs et enfin les graines. Vous pouvez aussi aller droit aux projets ou au carnet.</p>"
     ],
     choices: [
@@ -66,11 +53,7 @@ const SCENES = {
     body: [
       "<p>Je me vois comme une chercheuse de terrain plutôt qu'une universitaire&nbsp;: je conçois, je fabrique, je teste avec les gens, puis je documente ce qui marche.</p>",
       "<p>Mes terrains&nbsp;: les <em>low-tech</em> et la sobriété, les tiers-lieux et les communs, le design et le handicap, la transmission des sciences.</p>",
-      `<ul class="timeline">
-        <li><span class="when">2026</span><span>Co-organisatrice d'une session sur les low-tech à la <b>Sustainability Science Conference</b>, UNIL</span></li>
-        <li><span class="when">Intervention</span><span>Présentation conjointe avec <b>Simon Vuille</b> (UniNE) sur les low-tech et la désirabilité</span></li>
-        <li><span class="when">2016 – 2018</span><span>Colloques franco-suisses de la <b>Communauté du Savoir</b> (Interreg)</span></li>
-      </ul>`
+      "__INTERVENTIONS__"
     ],
     choices: [{ label: "Je monte vers les feuilles", to: "feuilles", primary: true }]
   },
@@ -81,12 +64,7 @@ const SCENES = {
     title: "Quatre verbes",
     body: [
       "<p>Quatre folioles sur chaque feuille, quatre façons de travailler qui se nourrissent les unes les autres.</p>",
-      `<div class="grid">
-        <div class="tile leaf"><h3>Je fabrique</h3><p>Design de produit et fabrication numérique&nbsp;: œuvres interactives pour le musée Sensorium à Berne, fourchettes totems de la Semaine du goût, le jeu <i>Yapasphoto</i>.</p></div>
-        <div class="tile leaf"><h3>Je forme</h3><p>Médiation et formations en fablab pour tous les publics depuis 2016, formations pour enseignant·es avec la HEP-BEJUNE, cours FreeCAD pas à pas en préparation.</p></div>
-        <div class="tile leaf"><h3>Je fédère</h3><p>Low-Tech Festilab, FabLab La Chaux-de-Fonds, Girls* on Ice, Swiss TecLadies&nbsp;: des projets qui tiennent parce que beaucoup de gens les portent.</p></div>
-        <div class="tile leaf"><h3>Je documente</h3><p>Un carnet sur ce site, des notes de recherche, du sketchnoting, et une rubrique «&nbsp;De notre production&nbsp;» pour le magazine 1000METRES.</p></div>
-      </div>`
+      "__VERBES__"
     ],
     choices: [{ label: "Je regarde les fleurs", to: "fleurs", primary: true }]
   },
@@ -96,16 +74,7 @@ const SCENES = {
     kicker: "Les fleurs",
     title: "Projets en fleur",
     body: [
-      `<div class="grid">
-        <div class="tile flower"><h3>Low-Tech Festilab</h3><span class="meta">Depuis 2024 · cofondatrice</span><p>Premier festival low-tech de Suisse&nbsp;: plus de 730 participant·es en 2025. En juin 2027, une résidence Visiophare avec le DIY Festival.</p></div>
-        <div class="tile flower"><h3>FabLab La Chaux-de-Fonds</h3><span class="meta">Depuis 2018 · co-présidente</span><p>Un lieu ouvert pour donner aux habitant·es des Montagnes neuchâteloises une culture technique qui rend autonome.</p></div>
-        <div class="tile flower"><h3>Girls* on Ice Switzerland</h3><span class="meta">Depuis 2025 · programme manager</span><p>Expéditions scientifiques en glacier pour jeunes filles, ateliers et excursions pour les écoles.</p></div>
-        <div class="tile flower"><h3>Swiss TecLadies, GO4IT, TecDays</h3><span class="meta">2023 – 2025 · SATW</span><p>Programmes de promotion des sciences techniques auprès des jeunes en Suisse romande.</p></div>
-        <div class="tile flower"><h3>Musée Sensorium</h3><span class="meta">Designer indépendante</span><p>Œuvres interactives pour un musée des sens à Berne, dont une Joconde en bas-relief.</p></div>
-        <div class="tile flower"><h3>Semaine du goût</h3><span class="meta">Ville de La Chaux-de-Fonds</span><p>Signalétique en fourchettes totems, usinées en HPL blanc au FabLab.</p></div>
-        <div class="tile flower"><h3><i>Yapasphoto</i></h3><span class="meta">Pour transN</span><p>Conception, graphisme et illustration d'un jeu.</p></div>
-        <div class="tile flower"><h3>8 mètres sous la mousse</h3><span class="meta">2026 · prototype</span><p>Une station de médiation sur les couches de la tourbière des Ponts-de-Martel. <a href="https://melaniethms.github.io/Tourbe/">Descendre dans la tourbe</a></p></div>
-      </div>`
+      "__PROJETS__"
     ],
     choices: [{ label: "Je récolte les graines", to: "carnet", primary: true }]
   },
@@ -158,6 +127,43 @@ try { POSTS = JSON.parse(document.getElementById("posts-data").textContent); } c
 function esc(s) {
   return String(s == null ? "" : s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 }
+let DATA = {};
+try { DATA = JSON.parse(document.getElementById("site-data").textContent) || {}; } catch (e) { DATA = {}; }
+
+// Mise en forme légère : **gras** et *italique*
+function md(t) {
+  return esc(t).replace(/\*\*(.+?)\*\*/g, "<b>$1</b>").replace(/\*(.+?)\*/g, "<i>$1</i>");
+}
+function renderTimeline(list) {
+  if (!Array.isArray(list) || !list.length) return "";
+  return '<ul class="timeline">' + list.map((x) => {
+    const t = x.titre ? `<b>${md(x.titre)}</b>` : "";
+    const d = x.detail ? (t ? ", " : "") + md(x.detail) : "";
+    return `<li><span class="when">${esc(x.quand)}</span><span>${t}${d}</span></li>`;
+  }).join("") + "</ul>";
+}
+function renderTiles(list, kind) {
+  if (!Array.isArray(list) || !list.length) return "";
+  return '<div class="grid">' + list.map((x) => {
+    const meta = x.meta ? `<span class="meta">${esc(x.meta)}</span>` : "";
+    const link = x.lien ? ` <a href="${esc(x.lien)}">${esc(x.lien_texte || "Voir")}</a>` : "";
+    return `<div class="tile ${kind}"><h3>${md(x.titre)}</h3>${meta}<p>${md(x.texte)}${link}</p></div>`;
+  }).join("") + "</div>";
+}
+function renderAccueil(a) {
+  if (!a) return "";
+  return (a.accroche ? `<p class="lead">${md(a.accroche)}</p>` : "") + (a.sous_ligne ? `<p>${md(a.sous_ligne)}</p>` : "");
+}
+const BLOCKS = {
+  __POSTS__: () => renderPosts(),
+  __ACCUEIL__: () => renderAccueil(DATA.accueil),
+  __RACINES__: () => renderTimeline(DATA.racines),
+  __RESEAU__: () => renderTimeline(DATA.reseau),
+  __INTERVENTIONS__: () => renderTimeline(DATA.interventions),
+  __VERBES__: () => renderTiles(DATA.verbes, "leaf"),
+  __PROJETS__: () => renderTiles(DATA.projets, "flower")
+};
+
 function renderPosts() {
   if (!POSTS.length) return '<p class="empty">Les premières graines germent : le carnet arrive bientôt.</p>';
   return '<ul class="posts">' + POSTS.map((p) =>
@@ -396,7 +402,7 @@ function show(id, { focus = true } = {}) {
   card.classList.toggle("wide", !!s.wide);
   $("kicker").textContent = s.kicker;
   $("title").textContent = s.title;
-  $("body").innerHTML = s.body.map((p) => (p === "__POSTS__" ? renderPosts() : p)).join("");
+  $("body").innerHTML = s.body.map((p) => (BLOCKS[p] ? BLOCKS[p]() : p)).join("");
   const aside = $("aside");
   aside.hidden = true;
   aside.innerHTML = "";
