@@ -1,0 +1,72 @@
+---
+layout: null
+title: "En bref"
+titre_onglet: "Mélanie Thomas en bref · MélaLab"
+resume: "Tout le site en une page : qui est Mélanie Thomas, ce qu'elle fait, ses projets, son parcours et comment la contacter."
+---
+<!doctype html>
+<html lang="fr">
+<head>
+{% include head.html %}
+</head>
+<body class="page bref">
+{% include entete.html %}
+  <main>
+    <article class="sheet">
+      <p class="kicker">MélaLab · tout le site en une page</p>
+      <h1>Mélanie Thomas</h1>
+      <p class="lead">{{ site.data.accueil.accroche }}</p>
+      <p>{{ site.data.accueil.sous_ligne }}</p>
+      <p class="imprimer"><button type="button" class="choice" onclick="window.print()">Imprimer cette page</button> <a class="choice" href="{{ '/' | relative_url }}">Parcourir la plante</a></p>
+
+      <h2 class="rubrique">Ce que je fais</h2>
+      <div class="grid">
+        {% for v in site.data.verbes %}<div class="tile leaf"><h3>{{ v.titre }}</h3><p>{{ v.texte | markdownify | remove: '<p>' | remove: '</p>' }}</p></div>{% endfor %}
+      </div>
+
+      <h2 class="rubrique">Projets</h2>
+      {% assign projets = site.projets | sort: "ordre" %}
+      <ul class="posts">
+        {% for p in projets %}
+        <li>
+          <span class="meta">{{ p.meta }}</span>
+          <h3><a href="{{ p.url | relative_url }}">{{ p.title }}</a></h3>
+          <p>{{ p.resume }}</p>
+        </li>
+        {% endfor %}
+      </ul>
+
+      <h2 class="rubrique">Interventions et recherche</h2>
+      <ul class="timeline">
+        {% for x in site.data.interventions %}<li><span class="when">{{ x.quand }}</span><span>{% if x.titre != "" %}<b>{{ x.titre }}</b>, {% endif %}{{ x.detail | markdownify | remove: '<p>' | remove: '</p>' }}</span></li>{% endfor %}
+      </ul>
+
+      <h2 class="rubrique">Réseau</h2>
+      <ul class="timeline">
+        {% for x in site.data.reseau %}<li><span class="when">{{ x.quand }}</span><span>{% if x.titre != "" %}<b>{{ x.titre }}</b>, {% endif %}{{ x.detail | markdownify | remove: '<p>' | remove: '</p>' }}</span></li>{% endfor %}
+      </ul>
+
+      <h2 class="rubrique">Formations</h2>
+      <ul class="timeline">
+        {% for x in site.data.racines %}<li><span class="when">{{ x.quand }}</span><span>{% if x.titre != "" %}<b>{{ x.titre }}</b>, {% endif %}{{ x.detail | markdownify | remove: '<p>' | remove: '</p>' }}</span></li>{% endfor %}
+      </ul>
+
+      <h2 class="rubrique">Derniers articles du carnet</h2>
+      <ul class="posts">
+        {% for post in site.posts limit:5 %}
+        <li><span class="meta">{{ post.date | date: "%d.%m.%Y" }} · {{ post.rubrique }}</span><h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3></li>
+        {% endfor %}
+      </ul>
+
+      <h2 class="rubrique">Contact</h2>
+      <div class="label">
+        <div class="t"><span class="latin">Melania fabricatrix</span> Thomas</div>
+        <div>La Chaux-de-Fonds (NE)</div>
+        <div><a href="mailto:melanie.thomas.design@gmail.com">melanie.thomas.design@gmail.com</a></div>
+        <div><a href="https://www.linkedin.com/in/melaniethomasdesign/">LinkedIn</a></div>
+        <div><a href="{{ '/feed.xml' | relative_url }}">Suivre le carnet (RSS)</a></div>
+      </div>
+    </article>
+  </main>
+</body>
+</html>

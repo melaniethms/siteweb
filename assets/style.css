@@ -403,3 +403,45 @@ h2.rubrique { font-size: 13.5px; letter-spacing: .14em; text-transform: uppercas
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition: none !important; animation: none !important; }
 }
+
+/* ---------- Fiches projets, navigation, bichromie ---------- */
+.couverture { margin: 0 0 22px; }
+.couverture img, .prose img { filter: url(#bichromie); transition: filter .4s ease; }
+.couverture img:hover, .prose img:hover { filter: none; }      /* survol : la photo d'origine */
+.couverture img { display: block; width: 100%; border: 1.5px solid var(--ink); }
+.voisins {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 30px;
+  padding-top: 14px;
+  border-top: 1.5px dashed var(--line);
+  font-size: 14.5px;
+}
+.voisins a { color: var(--rust-dark); font-weight: 700; text-decoration: none; }
+.voisins a:hover { text-decoration: underline; }
+.voisins .suivant { margin-left: auto; text-align: right; }
+.page .choice { display: inline-block; }
+.rss { margin-top: 26px; font-size: 14.5px; }
+.rss a { color: var(--rust-dark); font-weight: 700; }
+
+/* Page 404 */
+.graine-dormante { display: block; width: 100%; max-width: 420px; margin: 8px auto 18px; border: 1.5px solid var(--ink); }
+
+/* Page « En bref » */
+.bref .sheet h2.rubrique { margin-top: 34px; }
+.bref .grid { margin-top: 14px; }
+.imprimer { display: flex; flex-wrap: wrap; gap: 10px; margin: 18px 0 6px; }
+
+@media print {
+  @page { size: A4; margin: 14mm 14mm 16mm; }
+  body::after, .top, .imprimer, .back, .voisins, .rss { display: none !important; }
+  body.page { background: #fff; }
+  .page main { padding: 0; max-width: none; }
+  .page .sheet { border: 0; box-shadow: none; padding: 0; background: #fff; }
+  .page .sheet::before { display: none; }
+  .tile, .label, .posts li, .timeline li { break-inside: avoid; }
+  .tile.leaf { box-shadow: none; }
+  a { text-decoration: none; }
+}

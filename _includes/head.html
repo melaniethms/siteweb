@@ -1,0 +1,24 @@
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {% if page.titre_onglet %}{% assign titre = page.titre_onglet %}{% elsif page.title %}{% assign titre = page.title | append: " · MélaLab" %}{% else %}{% assign titre = "MélaLab — Mélanie Thomas" %}{% endif %}
+  {% assign desc = page.resume | default: page.description | default: site.description | strip_html | strip_newlines | truncate: 180 %}
+  {% if page.image %}{% assign img = page.image | absolute_url %}{% else %}{% assign img = "/assets/partage.png" | absolute_url %}{% endif %}
+  <title>{{ titre }}</title>
+  <meta name="description" content="{{ desc }}">
+  <link rel="canonical" href="{{ page.url | absolute_url }}">
+  <meta property="og:site_name" content="MélaLab">
+  <meta property="og:locale" content="fr_CH">
+  <meta property="og:title" content="{{ titre }}">
+  <meta property="og:description" content="{{ desc }}">
+  <meta property="og:url" content="{{ page.url | absolute_url }}">
+  <meta property="og:type" content="{% if page.date %}article{% else %}website{% endif %}">
+  <meta property="og:image" content="{{ img }}">
+  <meta property="og:image:alt" content="Melania fabricatrix, la plante emblème de MélaLab, dessinée en risographie sauge et rouille">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#f6f1e7">
+  <link rel="icon" href="{{ '/favicon.svg' | relative_url }}" type="image/svg+xml">
+  <link rel="icon" href="{{ '/favicon-32.png' | relative_url }}" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="{{ '/apple-touch-icon.png' | relative_url }}">
+  <link rel="alternate" type="application/atom+xml" title="Carnet de MélaLab" href="{{ '/feed.xml' | relative_url }}">
+  <link rel="preload" href="{{ '/assets/fonts/special-elite-latin-400-normal.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="{{ '/assets/style.css' | relative_url }}?v={{ site.time | date: '%s' }}">

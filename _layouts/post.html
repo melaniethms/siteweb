@@ -1,31 +1,24 @@
 <!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{{ page.title }} · Carnet de Mélanie Thomas</title>
-  <meta name="description" content="{{ page.resume | default: page.excerpt | strip_html | strip_newlines | truncate: 160 }}">
-  <meta property="og:title" content="{{ page.title }}">
-  <meta property="og:type" content="article">
-  <link rel="stylesheet" href="{{ '/assets/style.css' | relative_url }}?v={{ site.time | date: '%s' }}">
+{% include head.html %}
 </head>
 <body class="page">
-  <header class="top">
-    <a class="brand" href="{{ '/' | relative_url }}">Mélanie Thomas</a>
-    <nav aria-label="Raccourcis">
-      <a href="{{ '/#fleurs' | relative_url }}">Projets</a>
-      <a href="{{ '/carnet/' | relative_url }}">Carnet</a>
-      <a href="{{ '/#etiquette' | relative_url }}">Contact</a>
-    </nav>
-  </header>
+{% include bichromie.html %}
+{% include entete.html %}
   <main>
     <article class="sheet">
       <p class="kicker">Carnet{% if page.rubrique %} · {{ page.rubrique }}{% endif %}</p>
       <h1>{{ page.title }}</h1>
-      <p class="post-meta"><time datetime="{{ page.date | date: '%Y-%m-%d' }}">{{ page.date | date: "%d.%m.%Y" }}</time>{% if page.lieu %} · {{ page.lieu }}{% endif %}</p>
+      {% assign mots = content | strip_html | number_of_words %}{% assign minutes = mots | divided_by: 200 | plus: 1 %}
+      <p class="post-meta"><time datetime="{{ page.date | date: '%Y-%m-%d' }}">{{ page.date | date: "%d.%m.%Y" }}</time>{% if page.lieu %} · {{ page.lieu }}{% endif %} · {{ minutes }} min de lecture</p>
       <div class="prose">
         {{ content }}
       </div>
+      <nav class="voisins" aria-label="Autres articles">
+        {% if page.previous %}<a href="{{ page.previous.url | relative_url }}">← {{ page.previous.title }}</a>{% endif %}
+        {% if page.next %}<a class="suivant" href="{{ page.next.url | relative_url }}">{{ page.next.title }} →</a>{% endif %}
+      </nav>
       <a class="back" href="{{ '/carnet/' | relative_url }}">← Toutes les graines du carnet</a>
     </article>
   </main>

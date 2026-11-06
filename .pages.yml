@@ -130,23 +130,48 @@ content:
 
   - name: projets
     label: "Parcours · Fleurs (projets)"
-    type: file
-    path: _data/projets.yml
-    list: true
+    type: collection
+    path: _projets
+    filename:
+      template: "{primary}.md"
+      field: create
+    view:
+      fields: [title, meta, ordre]
+      primary: title
+      default:
+        sort: ordre
+        order: asc
     fields:
-      - name: titre
+      - name: title
         label: Nom du projet
         type: string
         required: true
       - name: meta
         label: Dates · rôle
         type: string
-      - name: texte
-        label: Description
+      - name: ordre
+        label: Ordre d'affichage (1 = en premier)
+        type: number
+      - name: resume
+        label: Résumé (affiché sur la carte)
         type: text
+        options:
+          maxlength: 220
+      - name: image
+        label: Image de couverture (passe en bichromie sauge et rouille)
+        type: image
+        options:
+          media: images
       - name: lien
-        label: Lien (facultatif)
+        label: Lien externe (facultatif)
         type: string
       - name: lien_texte
         label: Texte du lien
         type: string
+      - name: body
+        label: Fiche détaillée
+        type: rich-text
+        options:
+          format: markdown
+          media: images
+          switcher: true

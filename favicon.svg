@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <title>MélaLab</title>
+  <rect width="64" height="64" rx="12" fill="#f6f1e7"/>
+  <path d="M0 45 C14 41 26 47 38 44 S56 41 64 44 V52 Q64 64 52 64 H12 Q0 64 0 52Z" fill="#b5522b"/>
+  <g fill="#141414" opacity=".25"><circle cx="10" cy="54" r="1.4"/><circle cx="20" cy="58" r="1.4"/><circle cx="44" cy="55" r="1.4"/><circle cx="54" cy="59" r="1.4"/><circle cx="32" cy="57" r="1.4"/></g>
+  <path d="M33 46 C31 38 35 30 32 20" fill="none" stroke="#5d6b4f" stroke-width="4" stroke-linecap="round"/>
+  <path d="M32.5 30 C24 31 16 26 13 18 C22 17 29 22 32.5 30Z" fill="#8c9c7a" stroke="#5d6b4f" stroke-width="1.6"/>
+  <path d="M33 26 C39 21 47 20 52 23 C48 31 40 32 33 26Z" fill="#9eab8c" stroke="#5d6b4f" stroke-width="1.6"/>
+  <path d="M27 14 C27 9 37 8 37 14 C37 19 27 20 27 14Z" fill="#b5522b" stroke="#94401f" stroke-width="1.4"/>
+  <path d="M15 18 C22 18 29 23 32 30 M35 25 C40 22 46 21 51 23" fill="none" stroke="#b5522b" stroke-width="1" opacity=".55" transform="translate(1.5 1.5)"/>
+</svg>

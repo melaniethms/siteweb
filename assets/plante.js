@@ -349,11 +349,21 @@
         .replace(/stroke-width="[^"]*"/g, 'stroke-width="1.4"')
         .replace(/<path d="([^"]*)" fill="none"(?![^>]*stroke=)/g, `<path d="$1" fill="none" stroke="${C.rust}" stroke-width="1.4"`)}</g>`;
 
-    return defs +
+    // Croissance : la partie aérienne se dévoile de bas en haut (animation SVG, une seule fois)
+    const dur = o.pousse ? (typeof o.pousse === "number" ? o.pousse : 3.2) : 0;
+    const clip = dur ? `<clipPath id="croissance">
+        <rect x="-60" y="${f(ys)}" width="${W + 120}" height="${f(T - ys + 60)}"/>
+        <rect x="-60" y="${f(ys)}" width="${W + 120}" height="0">
+          <animate attributeName="y" from="${f(ys)}" to="-60" dur="${dur}s" begin="0.2s" fill="freeze" calcMode="spline" keySplines=".35 0 .25 1" keyTimes="0;1"/>
+          <animate attributeName="height" from="0" to="${f(ys + 60)}" dur="${dur}s" begin="0.2s" fill="freeze" calcMode="spline" keySplines=".35 0 .25 1" keyTimes="0;1"/>
+        </rect>
+      </clipPath>` : "";
+    const vivant = `<g filter="url(#riso)">${plant}</g>` + misreg + `<g filter="url(#riso)">${top}</g>`;
+    return defs.replace("</defs>", clip + "</defs>") +
       (o.ciel === false ? "" : `<rect x="0" y="0" width="${W}" height="${f(ys + 12)}" fill="url(#ciel)"/>`) +
       `<g filter="url(#riso)">${soil}</g>` +
       `<rect x="0" y="${f(ys)}" width="${W}" height="${f(soilBottom - ys)}" fill="url(#trame)" opacity=".13"/>` +
-      `<g filter="url(#riso)">${plant}</g>` + misreg + `<g filter="url(#riso)">${top}</g>`;
+      (dur ? `<g clip-path="url(#croissance)">${vivant}</g>` : vivant);
   }
 
   global.Plante = { dessin, couleurs: C, rng };

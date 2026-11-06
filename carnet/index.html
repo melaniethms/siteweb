@@ -1,25 +1,15 @@
 ---
 layout: null
 title: Le carnet
+resume: "Notes de terrain, lectures et retours d'expérience : low-tech, tiers-lieux, design et transmission des sciences."
 ---
 <!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Le carnet · Mélanie Thomas</title>
-  <meta name="description" content="Notes de terrain, lectures et retours d'expérience : low-tech, tiers-lieux, design et transmission des sciences.">
-  <link rel="stylesheet" href="{{ '/assets/style.css' | relative_url }}?v={{ site.time | date: '%s' }}">
+{% include head.html %}
 </head>
 <body class="page">
-  <header class="top">
-    <a class="brand" href="{{ '/' | relative_url }}">Mélanie Thomas</a>
-    <nav aria-label="Raccourcis">
-      <a href="{{ '/#fleurs' | relative_url }}">Projets</a>
-      <a href="{{ '/carnet/' | relative_url }}">Carnet</a>
-      <a href="{{ '/#etiquette' | relative_url }}">Contact</a>
-    </nav>
-  </header>
+{% include entete.html %}
   <main>
     <article class="sheet">
       <p class="kicker">Les graines</p>
@@ -52,6 +42,7 @@ title: Le carnet
         {% endif %}
       {% endfor %}
 
+      <p class="rss">Suivre le carnet : <a href="{{ '/feed.xml' | relative_url }}">flux RSS</a></p>
       <a class="back" href="{{ '/' | relative_url }}">← Revenir à la plante</a>
     </article>
   </main>

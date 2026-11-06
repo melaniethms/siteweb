@@ -33,7 +33,7 @@ const SCENES = {
 
   graine: {
     h: 0.15, label: "Graine",
-    kicker: "Herbier de terrain · Melania fabricatrix",
+    kicker: "MélaLab · herbier de terrain",
     title: "Mélanie Thomas",
     body: [
       "__ACCUEIL__",
@@ -104,6 +104,7 @@ const SCENES = {
         <div>Tiers-lieux, fablabs, salles de classe</div>
         <div><a href="mailto:melanie.thomas.design@gmail.com">melanie.thomas.design@gmail.com</a></div>
         <div><a href="https://www.linkedin.com/in/melaniethomasdesign/">LinkedIn</a></div>
+        <div><a href="__RSS__">Suivre le carnet (RSS)</a></div>
         <div><a href="https://melaniethms.github.io/Tourbe/fiche.html">Planche d'herbier complète</a></div>
         <div>leg. M. Thomas</div>
       </div>`
@@ -121,6 +122,7 @@ const SOIL = 0.18; // hauteur relative de la surface du sol
 
 /* ---------- Données du carnet ---------- */
 const CARNET = (window.SITE && window.SITE.carnet) || "carnet/";
+const RSS = (window.SITE && window.SITE.rss) || "feed.xml";
 let POSTS = [];
 try { POSTS = JSON.parse(document.getElementById("posts-data").textContent); } catch (e) { POSTS = []; }
 
@@ -146,7 +148,7 @@ function renderTiles(list, kind) {
   if (!Array.isArray(list) || !list.length) return "";
   return '<div class="grid">' + list.map((x) => {
     const meta = x.meta ? `<span class="meta">${esc(x.meta)}</span>` : "";
-    const link = x.lien ? ` <a href="${esc(x.lien)}">${esc(x.lien_texte || "Voir")}</a>` : "";
+    const link = x.url ? ` <a href="${esc(x.url)}">Voir la fiche&nbsp;→</a>` : (x.lien ? ` <a href="${esc(x.lien)}">${esc(x.lien_texte || "Voir")}</a>` : "");
     return `<div class="tile ${kind}"><h3>${md(x.titre)}</h3>${meta}<p>${md(x.texte)}${link}</p></div>`;
   }).join("") + "</div>";
 }
@@ -199,6 +201,16 @@ const yAt = (h) => TOTAL() - PAD() - h * COLUMN();
 
 function rand(seed) { let s = seed; return () => (s = (s * 16807) % 2147483647) / 2147483647; }
 
+// La plante pousse au premier passage de la visite (pas si l'animation est réduite)
+let grown = false;
+function firstGrowth() {
+  if (grown) return false;
+  grown = true;
+  if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return false;
+  try { if (sessionStorage.getItem("plante-poussee")) return false; sessionStorage.setItem("plante-poussee", "1"); } catch (e) {}
+  return 3.2;
+}
+
 function drawPlant() {
   H = window.innerHeight;
   const T = TOTAL();
@@ -210,7 +222,8 @@ function drawPlant() {
     couleurSol: (t) => { const [a, b, c] = colorAt(SOIL * (1 - t)); return `rgb(${a},${b},${c})`; },
     yRhizome: yAt(0.08), racine: (yAt(0.02) - ys) * 0.42,
     feuilles: 10, feuille: 230, portee: 280, fleur: 38, aigrette: 52,
-    envol: 460, hautEnvol: H * 0.55, graine: 11
+    envol: 460, hautEnvol: H * 0.55, graine: 11,
+    pousse: firstGrowth()
   });
 }
 
@@ -236,7 +249,7 @@ function show(id, { focus = true } = {}) {
   card.classList.toggle("wide", !!s.wide);
   $("kicker").textContent = s.kicker;
   $("title").textContent = s.title;
-  $("body").innerHTML = s.body.map((p) => (BLOCKS[p] ? BLOCKS[p]() : p)).join("");
+  $("body").innerHTML = s.body.map((p) => (BLOCKS[p] ? BLOCKS[p]() : p)).join("").replace("__RSS__", RSS);
   const aside = $("aside");
   aside.hidden = true;
   aside.innerHTML = "";
@@ -287,7 +300,7 @@ function show(id, { focus = true } = {}) {
   card.classList.add("enter");
   if (focus) card.focus({ preventScroll: true });
   window.scrollTo({ top: 0, behavior: "smooth" });
-  document.title = id === START ? "Mélanie Thomas — designer, low-tech et communs" : `${s.title} · Mélanie Thomas`;
+  document.title = id === START ? "MélaLab — Mélanie Thomas, design, low-tech et communs" : `${s.title} · MélaLab`;
 }
 
 function current() { const id = location.hash.slice(1); return SCENES[id] ? id : START; }

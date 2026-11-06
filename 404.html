@@ -1,0 +1,40 @@
+---
+layout: null
+permalink: /404.html
+title: "Cette graine n'a pas germé"
+titre_onglet: "Page introuvable · MélaLab"
+---
+<!doctype html>
+<html lang="fr">
+<head>
+{% include head.html %}
+</head>
+<body class="page">
+{% include entete.html %}
+  <main>
+    <article class="sheet perdu">
+      <p class="kicker">Erreur 404 · sous terre</p>
+      <h1>Cette graine n'a pas germé.</h1>
+      <svg class="graine-dormante" viewBox="0 0 320 170" role="img" aria-label="Une graine endormie dans la terre, un fil de mycélium à côté">
+        <rect x="0" y="40" width="320" height="130" fill="#c98a68"/>
+        <path d="M0 40 C60 30 120 50 180 38 S280 30 320 42 L320 60 L0 60Z" fill="#e0b092"/>
+        <path d="M20 120 C70 100 110 140 160 118 S250 90 300 112" fill="none" stroke="#f6f1e7" stroke-width="1.5" opacity=".7"/>
+        <path d="M90 128 c10 -14 26 -8 22 4 M210 104 c-6 -12 6 -22 16 -14" fill="none" stroke="#f6f1e7" stroke-width="1" opacity=".7"/>
+        <ellipse cx="160" cy="98" rx="24" ry="15" fill="#94401f" stroke="#141414" stroke-width="2" transform="rotate(-14 160 98)"/>
+        <path d="M150 94 q10 -6 20 2" fill="none" stroke="#efdcc4" stroke-width="2" stroke-linecap="round"/>
+        <text x="190" y="80" font-family="Special Elite, monospace" font-size="16" fill="#141414">z z z</text>
+        <g stroke="#7d8a3e" stroke-width="3" stroke-linecap="round">
+          <path d="M12 40 l2 -12 M40 40 l-3 -10 M250 40 l3 -12 M290 40 l-2 -10"/>
+        </g>
+        <g stroke="#b5522b" stroke-width="3" stroke-linecap="round"><path d="M26 40 l-1 -9 M268 40 l2 -9"/></g>
+      </svg>
+      <p>La page que vous cherchez n'existe pas, ou elle a été replantée ailleurs.</p>
+      <nav class="choices">
+        <a class="choice primary" href="{{ '/' | relative_url }}">Revenir à la plante</a>
+        <span class="or">ou</span>
+        <a class="choice" href="{{ '/carnet/' | relative_url }}">Fouiller le carnet</a>
+      </nav>
+    </article>
+  </main>
+</body>
+</html>

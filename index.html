@@ -1,32 +1,18 @@
 ---
 layout: null
+titre_onglet: "MélaLab — Mélanie Thomas, design, low-tech et communs"
 ---
 <!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Mélanie Thomas — designer, low-tech et communs</title>
-  <meta name="description" content="Entre design, low-tech et communs : je fabrique, je forme, je fédère et je documente. Un portfolio à parcourir comme une plante pousse.">
-  <meta property="og:title" content="Mélanie Thomas — Melania fabricatrix">
-  <meta property="og:description" content="Entre design, low-tech et communs : je fabrique, je forme, je fédère et je documente.">
-  <meta name="theme-color" content="#f6f1e7">
-  <link rel="preload" href="{{ '/assets/fonts/special-elite-latin-400-normal.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="{{ '/assets/style.css' | relative_url }}?v={{ site.time | date: '%s' }}">
+{% include head.html %}
 </head>
 <body>
   <div class="plant" aria-hidden="true">
     <svg id="plant-svg" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"></svg>
   </div>
 
-  <header class="top">
-    <a class="brand" href="#graine" data-go="graine">Mélanie Thomas</a>
-    <nav aria-label="Raccourcis">
-      <a href="#fleurs" data-go="fleurs">Projets</a>
-      <a href="{{ '/carnet/' | relative_url }}">Carnet</a>
-      <a href="#etiquette" data-go="etiquette">Contact</a>
-    </nav>
-  </header>
+{% include entete.html %}
 
   <ol class="stages" id="stages" aria-label="Stades de la plante"></ol>
 
@@ -41,22 +27,22 @@ layout: null
   </main>
 
   <footer class="foot">
-    <p>Site sobre : sans traceur, sans police externe · <a href="https://github.com/melaniethms/siteweb">code source</a></p>
+    <p>MélaLab · Mélanie Thomas · site sobre, sans traceur · <a href="{{ '/en-bref/' | relative_url }}">tout le site en une page</a> · <a href="{{ '/feed.xml' | relative_url }}">RSS</a></p>
   </footer>
 
   <noscript>
     <div class="noscript">
       <h1>Mélanie Thomas</h1>
       <p>Entre design, low-tech et communs&nbsp;: je fabrique, je forme, je fédère et je documente.</p>
-      <p><a href="{{ '/carnet/' | relative_url }}">Lire le carnet</a> · <a href="mailto:melanie.thomas.design@gmail.com">melanie.thomas.design@gmail.com</a></p>
+      <p><a href="{{ '/en-bref/' | relative_url }}">Lire tout le site en une page</a> · <a href="{{ '/carnet/' | relative_url }}">Le carnet</a> · <a href="mailto:melanie.thomas.design@gmail.com">melanie.thomas.design@gmail.com</a></p>
     </div>
   </noscript>
 
   <!-- Derniers articles du carnet, générés par GitHub Pages à partir du dossier _posts -->
   <script id="posts-data" type="application/json">[{% for post in site.posts limit:3 %}{"title": {{ post.title | jsonify }}, "url": {{ post.url | relative_url | jsonify }}, "date": {{ post.date | date: "%d.%m.%Y" | jsonify }}, "rubrique": {{ post.rubrique | jsonify }}, "resume": {{ post.resume | default: post.excerpt | strip_html | strip_newlines | truncate: 170 | jsonify }}}{% unless forloop.last %},{% endunless %}{% endfor %}]</script>
   <!-- Contenus du parcours, tirés du dossier _data (modifiables dans Pages CMS) -->
-  <script id="site-data" type="application/json">{"accueil": {{ site.data.accueil | jsonify }}, "racines": {{ site.data.racines | jsonify }}, "reseau": {{ site.data.reseau | jsonify }}, "interventions": {{ site.data.interventions | jsonify }}, "verbes": {{ site.data.verbes | jsonify }}, "projets": {{ site.data.projets | jsonify }}}</script>
-  <script>window.SITE = { carnet: "{{ '/carnet/' | relative_url }}" };</script>
+  <script id="site-data" type="application/json">{"accueil": {{ site.data.accueil | jsonify }}, "racines": {{ site.data.racines | jsonify }}, "reseau": {{ site.data.reseau | jsonify }}, "interventions": {{ site.data.interventions | jsonify }}, "verbes": {{ site.data.verbes | jsonify }}, "projets": [{% assign projets = site.projets | sort: "ordre" %}{% for p in projets %}{"titre": {{ p.title | jsonify }}, "meta": {{ p.meta | jsonify }}, "texte": {{ p.resume | jsonify }}, "url": {{ p.url | relative_url | jsonify }}}{% unless forloop.last %},{% endunless %}{% endfor %}]}</script>
+  <script>window.SITE = { carnet: "{{ '/carnet/' | relative_url }}", rss: "{{ '/feed.xml' | relative_url }}" };</script>
   <script src="{{ '/assets/plante.js' | relative_url }}?v={{ site.time | date: '%s' }}"></script>
   <script src="{{ '/assets/parcours.js' | relative_url }}?v={{ site.time | date: '%s' }}"></script>
 </body>

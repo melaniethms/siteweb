@@ -1,5 +1,6 @@
 # Site de Mélanie Thomas — construit automatiquement par GitHub Pages (Jekyll).
-title: Mélanie Thomas
+title: MélaLab
+author: Mélanie Thomas
 description: "Entre design, low-tech et communs : je fabrique, je forme, je fédère et je documente."
 lang: fr
 url: "https://melalab.ch"
@@ -14,12 +15,29 @@ kramdown:
 
 timezone: Europe/Zurich
 
+# Une page par projet (dossier _projets), à l'adresse /projets/nom-du-projet/
+collections:
+  projets:
+    output: true
+    permalink: /projets/:name/
+
+# Flux RSS du carnet (/feed.xml), extension prise en charge par GitHub Pages
+plugins:
+  - jekyll-feed
+feed:
+  path: feed.xml
+
 defaults:
   - scope:
       path: ""
       type: posts
     values:
       layout: post
+  - scope:
+      path: ""
+      type: projets
+    values:
+      layout: projet
 
 # Rubriques du carnet (champ « rubrique » de chaque article)
 rubriques:

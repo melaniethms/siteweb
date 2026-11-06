@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="fr">
+<head>
+{% include head.html %}
+</head>
+<body class="page">
+{% include bichromie.html %}
+{% include entete.html %}
+  <main>
+    <article class="sheet">
+      <p class="kicker">Projet · {{ page.meta }}</p>
+      <h1>{{ page.title }}</h1>
+      {% if page.image and page.image != "" %}
+      <figure class="couverture"><img src="{{ page.image | relative_url }}" alt="{{ page.title }}"></figure>
+      {% endif %}
+      <div class="prose">
+        {{ content }}
+      </div>
+      {% if page.lien and page.lien != "" %}
+      <p><a class="choice primary" href="{{ page.lien }}">{{ page.lien_texte | default: "Voir le projet" }} →</a></p>
+      {% endif %}
+      {% assign projets = site.projets | sort: "ordre" %}
+      <nav class="voisins" aria-label="Autres projets">
+        {% for p in projets %}{% if p.url == page.url %}
+          {% unless forloop.first %}{% assign i = forloop.index0 | minus: 1 %}<a href="{{ projets[i].url | relative_url }}">← {{ projets[i].title }}</a>{% endunless %}
+          {% unless forloop.last %}{% assign i = forloop.index0 | plus: 1 %}<a class="suivant" href="{{ projets[i].url | relative_url }}">{{ projets[i].title }} →</a>{% endunless %}
+        {% endif %}{% endfor %}
+      </nav>
+      <a class="back" href="{{ '/#fleurs' | relative_url }}">← Revenir aux fleurs</a>
+    </article>
+  </main>
+</body>
+</html>
