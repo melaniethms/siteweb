@@ -57,6 +57,7 @@ layout: null
   <!-- Contenus du parcours, tirés du dossier _data (modifiables dans Pages CMS) -->
   <script id="site-data" type="application/json">{"accueil": {{ site.data.accueil | jsonify }}, "racines": {{ site.data.racines | jsonify }}, "reseau": {{ site.data.reseau | jsonify }}, "interventions": {{ site.data.interventions | jsonify }}, "verbes": {{ site.data.verbes | jsonify }}, "projets": {{ site.data.projets | jsonify }}}</script>
   <script>window.SITE = { carnet: "{{ '/carnet/' | relative_url }}" };</script>
+  <script src="{{ '/assets/plante.js' | relative_url }}?v={{ site.time | date: '%s' }}"></script>
   <script src="{{ '/assets/parcours.js' | relative_url }}?v={{ site.time | date: '%s' }}"></script>
 </body>
 </html>
