@@ -2,7 +2,7 @@
 
 Site personnel (portfolio et carnet) à parcourir comme une plante pousse : racines, rhizomes, graine, tige, feuilles, fleurs, graines et étiquette d'herbier.
 
-En ligne : https://melaniethms.github.io/siteweb/
+En ligne : https://melalab.ch
 
 ## Modifier le site avec Pages CMS (le plus simple)
 
