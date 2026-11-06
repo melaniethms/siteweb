@@ -7,7 +7,7 @@
   <meta name="description" content="{{ page.resume | default: page.excerpt | strip_html | strip_newlines | truncate: 160 }}">
   <meta property="og:title" content="{{ page.title }}">
   <meta property="og:type" content="article">
-  <link rel="stylesheet" href="{{ '/assets/style.css' | relative_url }}">
+  <link rel="stylesheet" href="{{ '/assets/style.css' | relative_url }}?v={{ site.time | date: '%s' }}">
 </head>
 <body class="page">
   <header class="top">

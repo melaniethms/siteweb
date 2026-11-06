@@ -12,7 +12,7 @@ layout: null
   <meta property="og:description" content="Entre design, low-tech et communs : je fabrique, je forme, je fédère et je documente.">
   <meta name="theme-color" content="#f6f1e7">
   <link rel="preload" href="{{ '/assets/fonts/special-elite-latin-400-normal.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="{{ '/assets/style.css' | relative_url }}">
+  <link rel="stylesheet" href="{{ '/assets/style.css' | relative_url }}?v={{ site.time | date: '%s' }}">
 </head>
 <body>
   <div class="plant" aria-hidden="true">
@@ -55,6 +55,6 @@ layout: null
   <!-- Derniers articles du carnet, générés par GitHub Pages à partir du dossier _posts -->
   <script id="posts-data" type="application/json">[{% for post in site.posts limit:3 %}{"title": {{ post.title | jsonify }}, "url": {{ post.url | relative_url | jsonify }}, "date": {{ post.date | date: "%d.%m.%Y" | jsonify }}, "rubrique": {{ post.rubrique | jsonify }}, "resume": {{ post.resume | default: post.excerpt | strip_html | strip_newlines | truncate: 170 | jsonify }}}{% unless forloop.last %},{% endunless %}{% endfor %}]</script>
   <script>window.SITE = { carnet: "{{ '/carnet/' | relative_url }}" };</script>
-  <script src="{{ '/assets/parcours.js' | relative_url }}"></script>
+  <script src="{{ '/assets/parcours.js' | relative_url }}?v={{ site.time | date: '%s' }}"></script>
 </body>
 </html>
