@@ -38,7 +38,7 @@ const SCENES = {
     asides: [{
       label: "Pourquoi des rhizomes ?",
       title: "Rien ne pousse seul",
-      text: "Un rhizome pousse à l'horizontale et fait naître de nouvelles pousses à chaque nœud. C'est une bonne image pour un travail fait de partenariats."
+      text: "Un rhizome pousse à l'horizontale et fait naître de nouvelles pousses à chaque nœud. Autour, le mycélium relie les racines entre elles et fait circuler ce qui manque à chacune. C'est une bonne image pour un travail fait de partenariats."
     }],
     choices: [{ label: "Je remonte vers la lumière", to: "graine", primary: true }]
   },
@@ -166,13 +166,13 @@ function renderPosts() {
 }
 
 /* ---------- Couleurs selon la hauteur ---------- */
-const PALETTE = [
-  [0.00, [46, 32, 20]],
-  [0.12, [92, 66, 40]],
-  [0.18, [150, 120, 84]],
-  [0.24, [196, 204, 160]],
-  [0.60, [222, 228, 200]],
-  [1.00, [240, 238, 226]]
+const PALETTE = [            // papier teinté : rouille sous terre, sauge à l'air libre
+  [0.00, [120, 58, 32]],
+  [0.12, [170, 92, 58]],
+  [0.18, [224, 176, 146]],
+  [0.24, [214, 222, 202]],
+  [0.60, [232, 236, 224]],
+  [1.00, [246, 241, 231]]
 ];
 const mix = (a, b, t) => a.map((v, i) => Math.round(v + (b[i] - v) * t));
 function colorAt(h) {
@@ -215,6 +215,34 @@ function drawPlant() {
     o += `<path d="${d}" fill="rgb(${a},${b},${c})"/>`;
   }
 
+  // Soilpunk : mycélium qui court dans la terre, et débris de compost
+  o += '<g fill="none" stroke="#f6f1e7" stroke-linecap="round" opacity=".55">';
+  for (let i = 0; i < 16; i++) {
+    let x = r() * W, y = ys + 30 + r() * (T - ys - 60);
+    let ang = r() * Math.PI * 2;
+    let d = `M${x.toFixed(1)} ${y.toFixed(1)}`;
+    for (let k = 0; k < 14; k++) {
+      ang += (r() - 0.5) * 1.1;
+      x += Math.cos(ang) * 22; y += Math.sin(ang) * 14;
+      d += ` L${x.toFixed(1)} ${y.toFixed(1)}`;
+      if (r() < 0.3) {
+        const a2 = ang + (r() < 0.5 ? 1 : -1) * (0.6 + r() * 0.8);
+        o += `<path d="M${x.toFixed(1)} ${y.toFixed(1)} l${(Math.cos(a2) * 26).toFixed(1)} ${(Math.sin(a2) * 18).toFixed(1)} l${((r() - 0.5) * 16).toFixed(1)} ${((r() - 0.5) * 12).toFixed(1)}" stroke-width=".9"/>`;
+      }
+    }
+    o += `<path d="${d}" stroke-width="1.3"/>`;
+  }
+  o += "</g>";
+  for (let i = 0; i < 60; i++) {
+    const x = r() * W, y = ys + 20 + r() * (T - ys - 40);
+    const c = ["#141414", "#5d6b4f", "#f6f1e7"][i % 3];
+    if (i % 4 === 0) o += `<rect x="${x}" y="${y}" width="${4 + r() * 8}" height="${2 + r() * 3}" fill="${c}" opacity=".5" transform="rotate(${r() * 180} ${x} ${y})"/>`;
+    else o += `<circle cx="${x}" cy="${y}" r="${1 + r() * 2.5}" fill="${c}" opacity=".45"/>`;
+  }
+
+  const soil = o;
+  o = "";
+
   // Racines : chevelu sous la tige
   o += '<g fill="none" stroke="rgba(244,239,226,.75)" stroke-linecap="round">';
   for (let i = 0; i < 9; i++) {
@@ -241,11 +269,11 @@ function drawPlant() {
   // Mousse de surface
   for (let x = 0; x < W; x += 10) {
     const h = 8 + r() * 14;
-    o += `<line x1="${x}" y1="${ys + 3}" x2="${x + (r() - 0.5) * 6}" y2="${ys - h}" stroke="${r() > 0.6 ? "#a8324a" : "#6f7f3a"}" stroke-width="3.5" stroke-linecap="round"/>`;
+    o += `<line x1="${x}" y1="${ys + 3}" x2="${x + (r() - 0.5) * 6}" y2="${ys - h}" stroke="${r() > 0.6 ? "#b5522b" : "#8c9c7a"}" stroke-width="3.5" stroke-linecap="round"/>`;
   }
 
   // Graine posée au pied de la tige
-  o += `<ellipse cx="${cx - 34}" cy="${ys - 8}" rx="14" ry="9" fill="#7a5a33" stroke="#2b241c" stroke-width="2" transform="rotate(-18 ${cx - 34} ${ys - 8})"/>`;
+  o += `<ellipse cx="${cx - 34}" cy="${ys - 8}" rx="14" ry="9" fill="#b5522b" stroke="#141414" stroke-width="2" transform="rotate(-18 ${cx - 34} ${ys - 8})"/>`;
 
   // Tige
   const yTop = yAt(0.93);
@@ -260,7 +288,7 @@ function drawPlant() {
     const [x0, y0] = pts[i - 1], [x1, y1] = pts[i];
     stem += ` C${x0} ${(y0 + y1) / 2} ${x1} ${(y0 + y1) / 2} ${x1} ${y1}`;
   }
-  o += `<path d="${stem}" fill="none" stroke="#4f5a26" stroke-width="9" stroke-linecap="round"/>`;
+  o += `<path d="${stem}" fill="none" stroke="#5d6b4f" stroke-width="9" stroke-linecap="round"/>`;
   const stemX = (y) => cx + Math.sin(((y - ys) / (yTop - ys)) * 5.2) * 26;
 
   // Feuilles composées (quatre folioles) le long de la tige
@@ -271,12 +299,12 @@ function drawPlant() {
     const x = stemX(y);
     const len = 130 + r() * 50;
     o += `<g transform="translate(${x} ${y}) scale(${side} 1) rotate(${-20 - r() * 15})">`;
-    o += `<path d="M0 0 L${len} 0" stroke="#4f5a26" stroke-width="4"/>`;
+    o += `<path d="M0 0 L${len} 0" stroke="#5d6b4f" stroke-width="4"/>`;
     for (let k = 1; k <= 4; k++) {
       const px = (len * k) / 4.4;
       const s = 0.6 + k * 0.12;
-      o += `<path d="M${px} 0 c${18 * s} ${-34 * s} ${58 * s} ${-36 * s} ${70 * s} ${-28 * s} c${-12 * s} ${20 * s} ${-44 * s} ${32 * s} ${-70 * s} ${28 * s}Z" fill="#7d8a3e" stroke="#4f5a26" stroke-width="1.5"/>`;
-      o += `<path d="M${px} 0 c${18 * s} ${-34 * s} ${58 * s} ${-36 * s} ${70 * s} ${-28 * s} c${-12 * s} ${20 * s} ${-44 * s} ${32 * s} ${-70 * s} ${28 * s}Z" fill="#7d8a3e" stroke="#4f5a26" stroke-width="1.5" transform="scale(1 -1)"/>`;
+      o += `<path d="M${px} 0 c${18 * s} ${-34 * s} ${58 * s} ${-36 * s} ${70 * s} ${-28 * s} c${-12 * s} ${20 * s} ${-44 * s} ${32 * s} ${-70 * s} ${28 * s}Z" fill="#8c9c7a" stroke="#5d6b4f" stroke-width="1.5"/>`;
+      o += `<path d="M${px} 0 c${18 * s} ${-34 * s} ${58 * s} ${-36 * s} ${70 * s} ${-28 * s} c${-12 * s} ${20 * s} ${-44 * s} ${32 * s} ${-70 * s} ${28 * s}Z" fill="#8c9c7a" stroke="#5d6b4f" stroke-width="1.5" transform="scale(1 -1)"/>`;
     }
     o += "</g>";
   }
@@ -290,20 +318,20 @@ function drawPlant() {
     const x = stemX(y);
     const fx = x + side * (150 + r() * 220);
     const fy = y - 40 - r() * 80;
-    o += `<path d="M${x} ${y} C${x + side * 60} ${y - 10} ${fx - side * 60} ${fy + 50} ${fx} ${fy}" fill="none" stroke="#4f5a26" stroke-width="4"/>`;
+    o += `<path d="M${x} ${y} C${x + side * 60} ${y - 10} ${fx - side * 60} ${fy + 50} ${fx} ${fy}" fill="none" stroke="#5d6b4f" stroke-width="4"/>`;
     flowers.push([fx, fy, i]);
   }
   flowers.forEach(([fx, fy, i]) => {
     if (i % 2) {
       // fleur-atelier
       o += `<g transform="translate(${fx} ${fy})">`;
-      for (let k = 0; k < 6; k++) o += `<ellipse rx="13" ry="32" fill="#a8324a" transform="rotate(${k * 60}) translate(0 -26)"/>`;
-      o += `<polygon points="0,-17 14.7,-8.5 14.7,8.5 0,17 -14.7,8.5 -14.7,-8.5" fill="#f4efe2" stroke="#2b241c" stroke-width="3"/><circle r="6" fill="#2b241c"/></g>`;
+      for (let k = 0; k < 6; k++) o += `<ellipse rx="13" ry="32" fill="#b5522b" transform="rotate(${k * 60}) translate(0 -26)"/>`;
+      o += `<polygon points="0,-17 14.7,-8.5 14.7,8.5 0,17 -14.7,8.5 -14.7,-8.5" fill="#f6f1e7" stroke="#141414" stroke-width="3"/><circle r="6" fill="#141414"/></g>`;
     } else {
       // fleur tressée
-      o += `<g transform="translate(${fx} ${fy})"><circle r="42" fill="#e8d6b5" stroke="#7a5a33" stroke-width="3"/>`;
-      o += `<g fill="none" stroke="#7a5a33" stroke-width="2.4"><circle r="31"/><circle r="20"/><circle r="9"/><path d="M0 -42V42M-42 0H42M-30 -30L30 30M30 -30L-30 30"/></g>`;
-      o += `<g fill="#a8324a"><circle cy="-48" r="6"/><circle cx="48" r="6"/><circle cy="48" r="6"/><circle cx="-48" r="6"/></g></g>`;
+      o += `<g transform="translate(${fx} ${fy})"><circle r="42" fill="#efdcc4" stroke="#94401f" stroke-width="3"/>`;
+      o += `<g fill="none" stroke="#94401f" stroke-width="2.4"><circle r="31"/><circle r="20"/><circle r="9"/><path d="M0 -42V42M-42 0H42M-30 -30L30 30M30 -30L-30 30"/></g>`;
+      o += `<g fill="#5d6b4f"><circle cy="-48" r="6"/><circle cx="48" r="6"/><circle cy="48" r="6"/><circle cx="-48" r="6"/></g></g>`;
     }
   });
 
@@ -318,12 +346,32 @@ function drawPlant() {
     const gx = tx + 40 + r() * 460;
     const gy = yTop - 40 - r() * (H * 0.55);
     if (i % 5 === 0) {
-      o += `<rect x="${gx}" y="${gy}" width="16" height="16" fill="none" stroke="#2b241c" stroke-width="2.4"/><rect x="${gx + 5}" y="${gy + 5}" width="6" height="6" fill="#2b241c"/>`;
+      o += `<rect x="${gx}" y="${gy}" width="16" height="16" fill="none" stroke="#141414" stroke-width="2.4"/><rect x="${gx + 5}" y="${gy + 5}" width="6" height="6" fill="#141414"/>`;
     } else {
-      o += `<circle cx="${gx}" cy="${gy}" r="${3 + r() * 3}" fill="#2b241c"/><path d="M${gx} ${gy} l${-8 - r() * 8} ${-12 - r() * 8}" stroke="#fff" stroke-width="2"/>`;
+      o += `<circle cx="${gx}" cy="${gy}" r="${3 + r() * 3}" fill="#141414"/><path d="M${gx} ${gy} l${-8 - r() * 8} ${-12 - r() * 8}" stroke="#fff" stroke-width="2"/>`;
     }
   }
-  svg.innerHTML = o;
+  // Rendu riso : grain d'encre, trame de points sur la terre, second passage d'encre décalé
+  const defs = `<defs>
+    <filter id="riso" x="-2%" y="-2%" width="104%" height="104%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="1" seed="4" result="bruit"/>
+      <feColorMatrix in="bruit" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  1 0 0 0 0" result="alpha"/>
+      <feComponentTransfer in="alpha" result="masque"><feFuncA type="discrete" tableValues="0 1 1 1 1 1 1 1"/></feComponentTransfer>
+      <feComposite in="SourceGraphic" in2="masque" operator="in"/>
+    </filter>
+    <linearGradient id="ciel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f6f1e7"/><stop offset=".55" stop-color="#eceee3"/><stop offset="1" stop-color="#dfe5d4"/>
+    </linearGradient>
+    <pattern id="trame" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(28)">
+      <circle cx="5" cy="5" r="2" fill="#141414"/>
+    </pattern>
+  </defs>`;
+  svg.innerHTML = defs +
+    `<rect x="0" y="0" width="${W}" height="${ys + 12}" fill="url(#ciel)"/>` +
+    `<g filter="url(#riso)">${soil}</g>` +
+    `<rect x="0" y="${ys}" width="${W}" height="${T - ys}" fill="url(#trame)" opacity=".13"/>` +
+    `<g filter="url(#riso)">${o}</g>` +
+    `<g class="misreg" transform="translate(5 4)">${o}</g>`;
 }
 
 /* ---------- Affichage d'une étape ---------- */

@@ -24,5 +24,6 @@ Tous les textes du parcours sont dans `assets/parcours.js`, objet `SCENES`, une 
 ## Technique
 
 - Construit par GitHub Pages (Jekyll), sans thème ni extension.
-- Aucune dépendance externe, aucune police téléchargée, aucun traceur.
+- Aucune dépendance externe, aucun traceur. Les polices sont hébergées dans `assets/fonts` : Special Elite (titres, licence Apache 2.0) et Courier Prime (texte, licence SIL OFL 1.1).
+- Direction artistique « riso soilpunk » : encre noire, vert sauge `#8c9c7a`, orange rouille `#b5522b`, grain d'impression, trame de points et second passage d'encre décalé sur les illustrations (variables en haut de `assets/style.css`).
 - La plante est dessinée en SVG par `assets/parcours.js`.
